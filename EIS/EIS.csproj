@@ -51,6 +51,7 @@
     <Compile Include="Class\DashboardClass.cs" />
     <Compile Include="Class\UtilityClass.cs" />
     <Compile Include="Controller\DashboardController.cs" />
+    <Compile Include="Model\MenuChildModel.cs" />
     <Compile Include="Model\MenuModel.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>

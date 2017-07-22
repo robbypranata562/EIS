@@ -18,7 +18,7 @@ namespace EIS.Controller
         List<NavBarItem> sample2 = new List<NavBarItem>();
         List<NavBarItem> sample3;
         NavBarItem Item;// = new NavBarItem();
-        List<NavBarItem> ItemChild = new List<NavBarItem>();// = new NavBarItem();
+        NavBarItem ItemChild;// = new NavBarItem();
         //int[] a = new int[200];
         List<NavBarItem>[] arr = new List<NavBarItem>[50];
         public List<NavBarItem> generateMenu () {
@@ -30,34 +30,44 @@ namespace EIS.Controller
             //var a = arr[0].FirstOrDefault().ParentID;
            // arr[0].FirstOrDefault().ParentID)
             //get child
-            for (var i = 0; i < ret.Count; i++)
-            {
-                if (ret[i].parent != "0")
-                {
-                    ItemChild.Add(new NavBarItem { ID = Convert.ToInt32(ret[i].t_menu_id), Text = ret[i].menu_name, ParentID = Convert.ToInt32(ret[i].parent) });
-                }
-            }
+            //for (var i = 0; i < ret.Count; i++)
+            //{
+            //    if (ret[i].parent != "0")
+            //    {
+            //        ItemChild.Add(new NavBarItem { ID = Convert.ToInt32(ret[i].t_menu_id), Text = ret[i].menu_name, ParentID = Convert.ToInt32(ret[i].parent) });
+            //    }
+            //}
             //
             for (var i = 0; i < ret.Count; i++)
             {
-                if (ret[i].parent == "0")
+                var retChild = DC.GenerateMenuChild(ret[i].t_menu_id);
+                for (var j = 0; j < retChild.Count; j++)
                 {
-                    sample2.Add(new NavBarItem 
-                    { 
-                        ID = Convert.ToInt32(ret[i].t_menu_id), 
-                        Text = ret[i].menu_name,
-                        Childs = ItemChild
-                    });
-
-                    
+                    if (retChild[j].parent != "0")
+                    {
+                        //ItemChild.Add(new NavBarItem 
+                        //{ 
+                        //    ID = Convert.ToInt32(retChild[j].t_menu_id), 
+                        //    Text = retChild[j].menu_name, 
+                        //    ParentID = Convert.ToInt32(retChild[j].parent) 
+                        //}
+                        //);
+                            ItemChild.ID = Convert.ToInt32(retChild[j].t_menu_id);
+                            ItemChild.Text = retChild[j].menu_name;
+                            ItemChild.ParentID = Convert.ToInt32(retChild[j].parent);
+                    }
                 }
-            }
-            sample2.Add(new NavBarItem
-                {
-                    ID = 1001,
-                    Text = "Child Ekskul",
-                    ParentID = 1
+                sample2.Add(new NavBarItem 
+                { 
+                    ID = Convert.ToInt32(ret[i].t_menu_id), 
+                    Text = ret[i].menu_name,
+                    Childs = new List<NavBarItem> 
+                    {
+                        ItemChild
+                    }
                 });
+
+            }
                 return sample2;
         }
 

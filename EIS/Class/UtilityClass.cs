@@ -18,7 +18,7 @@ namespace EIS.Class
         public SqlConnection connection = new SqlConnection();
         public SqlDataReader dtreader;
         public SqlDataAdapter DA;
-        public string _connString = "Data Source=RNH;Initial Catalog=db_sis;Persist Security Info=True;UID=sa;PWD=password";
+        public string _connString = "Data Source=SERVERCORE-PC;Initial Catalog=db_sis;Persist Security Info=True;UID=sa;PWD=password";
         public SqlParameter param = new SqlParameter();
         public Boolean conn;
         public SqlDependency commanddependency;

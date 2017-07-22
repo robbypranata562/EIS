@@ -10,6 +10,7 @@ namespace EIS.Class
     class DashboardClass
     {
         List<MenuModel> ModelMenu = new List<MenuModel>();
+        List<MenuChildModel> ModelMenuChild = new List<MenuChildModel>();
         UtilityClass UC = new UtilityClass();
         string sql = "";
         string ret = "";
@@ -21,20 +22,12 @@ namespace EIS.Class
             {
 
                 sql =
-                    ";WITH Tree_CTE(Tree_ID, Tree_name, Parent_ID, Seq_index, Full_index, Tree_level) " +
-                    "    AS " +
-                    "    ( " +
-                    "        SELECT [MenuTree].*, 0  FROM [MenuTree] WHERE Parent_ID =0 " +
-                    "        UNION ALL " +
-                    "        SELECT ChildNode.*, Tree_level+1  FROM [MenuTree] AS ChildNode " +
-                    "        INNER JOIN Tree_CTE " +
-                    "        ON ChildNode.Parent_ID = Tree_CTE.Tree_ID " +
-                    "    ) " +
-                    "    SELECT * FROM Tree_CTE order by Full_index";
+                    "SELECT Tree_ID , Tree_Name , Parent_ID FROM MenuTree where Parent_ID = 0 order by Full_index";
                 UC.command.CommandType = System.Data.CommandType.Text;
                 UC.command.Connection = UC.connection;
                 UC.command.CommandText = sql;
                 UC.dtreader = UC.command.ExecuteReader();
+                ModelMenu.Clear();
                 while (UC.dtreader.Read())
                 {
                     var BM = new MenuModel();
@@ -45,6 +38,31 @@ namespace EIS.Class
                 }
             }
             return ModelMenu;
+
+        }
+
+        public List<MenuChildModel> GenerateMenuChild(string parent)
+        {
+            if (UC.OpenConnection())
+            {
+
+                sql =
+                     "SELECT Tree_ID , Tree_Name , Parent_ID FROM MenuTree where Parent_ID = '"+parent+"' order by Full_index";
+                UC.command.CommandType = System.Data.CommandType.Text;
+                UC.command.Connection = UC.connection;
+                UC.command.CommandText = sql;
+                UC.dtreader = UC.command.ExecuteReader();
+                ModelMenu.Clear();
+                while (UC.dtreader.Read())
+                {
+                    var XX = new MenuChildModel();
+                    XX.t_menu_id = UC.dtreader[0].ToString();
+                    XX.menu_name = UC.dtreader[1].ToString();
+                    XX.parent = UC.dtreader[2].ToString();
+                    ModelMenuChild.Add(XX);
+                }
+            }
+            return ModelMenuChild;
 
         }
     }

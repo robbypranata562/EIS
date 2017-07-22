@@ -1,0 +1,11 @@
+E:\Net\C#\EIS\EIS\bin\Debug\EIS.exe.config
+E:\Net\C#\EIS\EIS\obj\Debug\EIS.csprojResolveAssemblyReference.cache
+E:\Net\C#\EIS\EIS\obj\Debug\EIS.Form1.resources
+E:\Net\C#\EIS\EIS\obj\Debug\EIS.Properties.Resources.resources
+E:\Net\C#\EIS\EIS\obj\Debug\EIS.csproj.GenerateResource.Cache
+E:\Net\C#\EIS\EIS\bin\Debug\EIS.exe
+E:\Net\C#\EIS\EIS\bin\Debug\EIS.pdb
+E:\Net\C#\EIS\EIS\bin\Debug\Z80NavBarControl.dll
+E:\Net\C#\EIS\EIS\bin\Debug\Z80NavBarControl.xml
+E:\Net\C#\EIS\EIS\obj\Debug\EIS.exe
+E:\Net\C#\EIS\EIS\obj\Debug\EIS.pdb
